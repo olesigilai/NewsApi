@@ -1,5 +1,5 @@
-import urllib.request,json
 from .models import News
+import requests,json
 
 News = News
 
@@ -21,16 +21,15 @@ def get_news(category):
     Function that gets the json responce to our url request
     '''
     get_news_url = base_url.format(category,api_key)
+    print(get_news_url)
+    
+    get_news_response = requests.get(get_news_url).json()
 
-    with urllib.request.urlopen(get_news_url) as url:
-        get_news_data = url.read()
-        get_news_response = json.loads(get_news_data)
+        
 
-        news_results = None
-
-        if get_news_response['articles']:
-            news_results_list = get_news_response['articles']
-            news_results = process_results(news_results_list)
+    if get_news_response['articles']:
+        news_results_list = get_news_response['articles']
+        news_results = process_results(news_results_list)
 
 
     
@@ -39,21 +38,22 @@ def get_news(category):
 
 
 
-def search_news(news_name):
+# def search_news(news_name):
     
-    search_news_url ='http://newsapi.org/v2/everything?q={}&from=2021-01-21&sortBy=publishedAt&apiKey={}'.format(news_name,api_key)
-    with urllib.request.urlopen(search_news_url) as url:
-        search_news_data = url.read()
-        search_news_response = json.loads(search_news_data)
+#     search_news_url ='http://newsapi.org/v2/everything?q={}&from=2021-01-22&sortBy=publishedAt&apiKey={}'.format(news_name,api_key)
+    
+        
+#     get_news_response = requests.get(get_news_url).json()
+        
 
-        search_news_results = None
+#     search_news_results = None
 
-        if search_news_response['results']:
-            search_news_list = search_news_response['results']
-            search_news_results = process_results(search_news_list)
+#     if search_news_response['results']:
+#         search_news_list = search_news_response['results']
+#         search_news_results = process_results(search_news_list)
 
 
-    return search_news_results
+#     return search_news_results
 
 
 
@@ -86,17 +86,15 @@ def get_article(source):
     Function that gets the json responce to our url request
     '''
     get_news_url = base_url.format(source,api_key)
-    with urllib.request.urlopen(get_news_url) as url:
-        get_news_data = url.read()
-        get_news_response = json.loads(get_news_data)
-
-        news_results = None
-
-        if get_news_response['articles']:
-            news_results_list = get_news_response['articles']
-            news_results = process_results(news_results_list)
-
-
     
+    # get_news_response = json.loads(get_news_data)
+    get_news_response = requests.loads(get_news_data).json()
+
+        # news_results = None
+
+    if get_news_response['articles']:
+        news_results_list = get_news_response['articles']
+        news_results = process_results(news_results_list)
+   
 
     return news_results

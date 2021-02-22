@@ -10,13 +10,14 @@
 
 <!-- Content block -->
 {% block content %}
+
 <div class="container">
-    <form>
+    <!-- <form>
         <input type="text" name="news_query" placeholder="Search for a News" class="form-control">
         <input type="submit" value="Submit" class="btn btn-default">
-    </form>
+    </form> -->
 
-</div>
+
 <div class="row">
     
         <!-- Popular News -->
@@ -48,13 +49,14 @@
     <ul>
         {{ macro.displayNewsList(techcrunch)}}
     </ul>
-
+</div>
 <div class="row">
     <!-- Now showing News -->
     <h3>Wall Street News</h3>
     <ul>
         {{ macro.displayNewsList(wall_street)}}
     </ul>
+</div>
 </div>
 
 
